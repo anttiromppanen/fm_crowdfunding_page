@@ -10,7 +10,7 @@ function FundingProgressSection() {
   const progressBarWidth = ((fundingAmount / maxFunding) * 100).toFixed(0);
 
   return (
-    <article className="!pb-8">
+    <article>
       <div className="flex *:first-line:text-2xl *:first-line:font-bold [&>*:not(:last-child)]:border-r">
         <div className="pr-14">
           <p>{`$${fundingAmount.toLocaleString()}`}</p>
@@ -25,9 +25,9 @@ function FundingProgressSection() {
           <p>days left</p>
         </div>
       </div>
-      <div className="bg-userDarkGray/10 mt-6 h-3 rounded-xl">
+      <div className="mt-6 h-3 rounded-xl bg-userDarkGray/10">
         <div
-          className="bg-userModerateCyan h-full rounded-xl"
+          className="h-full rounded-xl bg-userModerateCyan"
           style={{ width: `${Number(progressBarWidth)}%` }}
         />
       </div>

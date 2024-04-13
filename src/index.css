@@ -8,3 +8,10 @@
     @apply bg-gray-100;
   }
 }
+
+@layer components {
+  .border-product-option {
+    border-color: hsl(0 0% 48% / 0.2);
+    border-width: 1px;
+  }
+}
