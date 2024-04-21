@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <div className="bg-userHeaderBgMobile md:bg-userHeaderBgDesktop h-60 w-full bg-cover bg-bottom bg-no-repeat md:h-96">
+    <div className="h-60 w-full bg-userDarkCyan bg-userHeaderBgMobile bg-cover bg-bottom bg-no-repeat md:h-96 md:bg-userHeaderBgDesktop">
       Header
     </div>
   );

@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { motion } from "framer-motion";
+import usePledgeStore from "../../store/usePledgeStore";
 
 const maxFunding = 100_000;
-const defaultBackersNum = 5007;
 const daysLeft = 56;
 
 function FundingProgressSection() {
-  const [fundingAmount, setFundingAmount] = useState(89_914);
+  const fundingAmount = usePledgeStore((state) => state.pledgeAmount);
+  const backersAmount = usePledgeStore((state) => state.backersAmount);
 
   const progressBarWidth = ((fundingAmount / maxFunding) * 100).toFixed(0);
 
@@ -17,7 +18,7 @@ function FundingProgressSection() {
           <p>{`of $${maxFunding.toLocaleString()} backed`}</p>
         </div>
         <div className="px-14">
-          <p>{`$${defaultBackersNum.toLocaleString()}`}</p>
+          <p>{backersAmount.toLocaleString()}</p>
           <p>total backers</p>
         </div>
         <div className="px-14">
@@ -26,9 +27,11 @@ function FundingProgressSection() {
         </div>
       </div>
       <div className="mt-6 h-3 rounded-xl bg-userDarkGray/10">
-        <div
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: `${Number(progressBarWidth)}%` }}
+          transition={{ duration: 3, type: "spring" }}
           className="h-full rounded-xl bg-userModerateCyan"
-          style={{ width: `${Number(progressBarWidth)}%` }}
         />
       </div>
     </article>

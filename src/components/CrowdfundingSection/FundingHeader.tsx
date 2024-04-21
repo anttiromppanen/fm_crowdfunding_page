@@ -1,11 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
+import { BookmarkIcon } from "@heroicons/react/16/solid";
 import productLogoImg from "../../assets/images/logo-mastercraft.svg";
+import useGeneralStateStore from "../../store/useGeneralStateStore";
 
-interface Props {
-  setShowParticipationOverlay: Dispatch<SetStateAction<boolean>>;
-}
+function FundingHeader() {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const setShowParticipationOverlay = useGeneralStateStore(
+    (state) => state.setShowParticipationOverlay,
+  );
 
-function FundingHeader({ setShowParticipationOverlay }: Props) {
+  const handleBookmarkClick = () => setIsBookmarked((state) => !state);
+
   return (
     <article className="flex flex-col items-center">
       <img src={productLogoImg} alt="Product logo" className="-mt-[86px]" />
@@ -19,15 +24,30 @@ function FundingHeader({ setShowParticipationOverlay }: Props) {
         <button
           type="button"
           onClick={() => setShowParticipationOverlay(true)}
-          className="rounded-full bg-userModerateCyan px-10 py-3 font-semibold text-white"
+          className="rounded-full bg-userModerateCyan px-10 py-3 font-semibold text-white hover:bg-userDarkCyan"
         >
           Back this project
         </button>
         <button
           type="button"
-          className="rounded-full bg-userDarkGray/20 px-10 py-3 font-semibold text-userDarkCyan"
+          onClick={handleBookmarkClick}
+          className={`
+            relative flex items-center rounded-full bg-userDarkGray/20 font-semibold text-userDarkGray transition-all duration-300
+            ${isBookmarked && "bg-userDarkGray/5 !text-userDarkCyan"}
+          `}
         >
-          Bookmark
+          <div
+            className={`
+            flex h-12 w-12 items-center justify-center rounded-full bg-userDarkGray
+            ${isBookmarked && "bg-userDarkCyan"}
+            `}
+          >
+            <BookmarkIcon
+              className={`h-4 w-4 text-gray-300 ${isBookmarked && "!text-white"}`}
+            />
+          </div>
+
+          <p className="mx-6">{isBookmarked ? "Bookmarked" : "Bookmark"}</p>
         </button>
       </div>
     </article>
