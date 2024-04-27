@@ -10,6 +10,7 @@ module.exports = {
         userModerateCyan: "hsl(176, 50%, 47%)",
         userDarkCyan: "hsl(176, 72%, 28%)",
         userDarkGray: "hsl(0, 0%, 48%)",
+        userOverlayBgColor: "hsla(0, 0, 0, 0.5)",
       },
       backgroundImage: {
         userHeaderBgMobile: "url('/image-hero-mobile.jpg')",

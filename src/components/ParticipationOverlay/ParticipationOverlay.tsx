@@ -4,12 +4,12 @@ import { MouseEventHandler } from "react";
 import successImg from "../../assets/images/icon-check.svg";
 import useGeneralStateStore from "../../store/useGeneralStateStore";
 import Options from "./Options";
-import ProductOptionRadioButton from "./ProductOptionRadioButton";
+import ProductOptionRadioButton from "./ProductOptionRadioButton/ProductOptionRadioButton";
 
 const submittedVariants: Variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
+  initial: { opacity: 0, translateX: "-70%", top: "50%", translateY: "-50%" },
+  animate: { opacity: 1, translateX: "-50%", top: "50%", translateY: "-50%" },
+  exit: { opacity: 0, translateX: "-40%", transition: { duration: 1 } },
 };
 
 function ParticipationOverlay() {
@@ -28,12 +28,17 @@ function ParticipationOverlay() {
   const handleSubmittedClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setShowParticipationOverlay(false);
-    setIsPledgeSubmitted(false);
+    // without timeout the 2 components unmounting looks goofy
+    setTimeout(() => {
+      setIsPledgeSubmitted(false);
+    }, 500);
   };
 
   const handleBackgroundClick = () => {
     setShowParticipationOverlay(false);
-    setIsPledgeSubmitted(false);
+    setTimeout(() => {
+      setIsPledgeSubmitted(false);
+    }, 500);
   };
 
   return (
@@ -46,15 +51,24 @@ function ParticipationOverlay() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={handleBackgroundClick}
-      className="fixed left-0 top-0 z-50 flex min-h-[100dvh] w-full items-center justify-center !rounded-none !bg-black/50"
+      className="
+      fixed left-0 top-0 z-50 flex min-h-[100dvh] w-full items-center justify-center !rounded-none 
+      !bg-black/50 text-sm
+      md:text-base 
+      "
     >
-      {isPledgeSubmitted ? (
-        <AnimatePresence>
+      <AnimatePresence>
+        {isPledgeSubmitted ? (
           <motion.div
+            key="testings"
             variants={submittedVariants}
             initial="initial"
             animate="animate"
-            className="fixed left-1/2 top-1/2 flex w-96 !-translate-x-1/2 !-translate-y-1/2 flex-col items-center rounded-lg bg-white px-8 py-10 text-center"
+            exit="exit"
+            transition={{ delay: 0.3 }}
+            className="
+            fixed left-1/2 flex w-96 flex-col items-center rounded-lg bg-white px-8 py-10 text-center
+            "
           >
             <img src={successImg} alt="Success" />
             <h2 className="mt-10 text-2xl font-bold">
@@ -73,10 +87,8 @@ function ParticipationOverlay() {
               Got it
             </button>
           </motion.div>
-        </AnimatePresence>
-      ) : (
-        <AnimatePresence>
-          <Options resetParentClick={resetParentClick}>
+        ) : (
+          <Options resetParentClick={resetParentClick} key="testings2">
             <ProductOptionRadioButton
               id="no-reward"
               heading="Pledge with no reward"
@@ -89,29 +101,29 @@ function ParticipationOverlay() {
               id="bamboo-stand"
               heading="Bamboo Stand"
               text="
-            You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
-            you’ll be added to a special Backer member list.
-          "
+              You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
+              you’ll be added to a special Backer member list.
+              "
             />
             <ProductOptionRadioButton
               id="black-edition-stand"
               heading="Black Edition Stand"
               text="
-            You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
-            member list. Shipping is included.
-          "
+              You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
+              member list. Shipping is included.
+              "
             />
             <ProductOptionRadioButton
               id="mahogany-stand"
               heading="Mahogany Special Edition"
               text="
-            You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
-            to our Backer member list. Shipping is included.
-          "
+              You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
+              to our Backer member list. Shipping is included.
+              "
             />
           </Options>
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

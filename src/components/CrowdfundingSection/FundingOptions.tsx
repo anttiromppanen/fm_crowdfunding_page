@@ -30,15 +30,17 @@ function Option({ id, heading, text }: OptionProps) {
       border-product-option flex flex-col gap-y-6 rounded-lg
       ${numOfLeft === 0 && "opacity-50"}`}
     >
-      <div className="px-8 py-10">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold text-black">{heading}</h3>
+      <div className="p-5 md:px-8 md:py-10">
+        <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
+          <h3 className="text-base font-bold text-black md:text-lg">
+            {heading}
+          </h3>
           <p className="text-sm font-bold text-userModerateCyan">
             {`Pledge $${requiredPledgeAmount} or more`}
           </p>
         </div>
         <p className="mt-6 text-userDarkGray">{text}</p>
-        <div className="mt-6 flex justify-between">
+        <div className="mt-6 flex flex-col justify-between gap-y-6 md:flex-row">
           <p className="flex items-center text-sm text-userDarkGray">
             <span className="mr-2 text-3xl font-bold text-black">
               {numOfLeft}
@@ -48,9 +50,10 @@ function Option({ id, heading, text }: OptionProps) {
           <button
             type="button"
             onClick={handleButtonClick}
+            disabled={numOfLeft <= 0}
             className={`
-            rounded-full bg-userModerateCyan px-7 py-3 text-sm text-white hover:bg-userDarkCyan
-            md:min-w-[145px]
+            w-2/3 rounded-full bg-userModerateCyan px-7 py-4 text-sm text-white hover:bg-userDarkCyan
+            md:w-auto md:min-w-[145px] md:py-3
             ${numOfLeft === 0 && "bg-userDarkGray hover:cursor-default hover:bg-userDarkGray"}`}
           >
             {numOfLeft !== 0 ? "Select Reward" : "Out of stock"}
@@ -63,7 +66,7 @@ function Option({ id, heading, text }: OptionProps) {
 
 function FundingOptions() {
   return (
-    <article className="flex flex-col gap-y-12 text-userDarkGray">
+    <article className="flex flex-col gap-y-6 text-sm text-userDarkGray md:gap-y-12 md:text-base">
       <h2 className="text-xl font-bold text-black">About this project</h2>
       <p>
         The Mastercraft Bamboo Monitor Riser is a sturdy and stylish platform
@@ -77,7 +80,7 @@ function FundingOptions() {
         desk space below your computer to allow notepads, pens, and USB sticks
         to be stored under the stand.
       </p>
-      <div className="flex flex-col gap-y-6">
+      <div className="mt-2 flex flex-col gap-y-6 md:mt-0">
         <Option
           id="bamboo-stand"
           heading="Bamboo Stand"

@@ -5,12 +5,17 @@ import FundingOptions from "./FundingOptions";
 import FundingProgressSection from "./FundingProgressSection";
 import useGeneralStateStore from "../../store/useGeneralStateStore";
 
-export default function CrowdfundingSection() {
+function CrowdfundingSection() {
   const showParticipationOverlay = useGeneralStateStore(
     (state) => state.showParticipationOverlay,
   );
   return (
-    <section className="-mt-10 mb-20 flex w-full max-w-3xl flex-col gap-y-4 *:rounded-md *:bg-white *:px-10 *:pb-11 *:pt-14">
+    <section
+      className="
+        mb-20 mt-56 flex w-full max-w-3xl flex-col gap-y-8 *:rounded-lg *:bg-white *:px-6 *:pb-11 *:pt-8
+        *:shadow-sm 
+        md:gap-y-4 md:*:px-10 md:*:pt-14"
+    >
       <AnimatePresence>
         {showParticipationOverlay && <ParticipationOverlay />}
       </AnimatePresence>
@@ -20,3 +25,5 @@ export default function CrowdfundingSection() {
     </section>
   );
 }
+
+export default CrowdfundingSection;
