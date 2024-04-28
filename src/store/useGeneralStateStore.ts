@@ -13,7 +13,7 @@ interface GeneralStateStoreProps {
 const useGeneralStateStore = create<GeneralStateStoreProps>()((set) => ({
   activeRadioTab: "",
   showParticipationOverlay: false,
-  isPledgeSubmitted: true,
+  isPledgeSubmitted: false,
   setActiveRadioTab: (option) => set(() => ({ activeRadioTab: option })),
   setShowParticipationOverlay: (value) =>
     set(() => ({ showParticipationOverlay: value })),
