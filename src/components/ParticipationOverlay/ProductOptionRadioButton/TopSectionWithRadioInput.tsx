@@ -1,4 +1,5 @@
 import { ExtendedOptionIds as OptionIds } from "../../../types/types";
+import ProductsLeftText from "./ProductsLeftText";
 
 interface Props {
   id: OptionIds;
@@ -39,7 +40,7 @@ function TopSectionWithRadioInput({
           {/* OPTION HEADING & REQUIRED PLEDGE AMOUNT TEXT */}
           <div className="flex flex-col md:flex-row">
             <p
-              className={`ml-4 font-bold ${numOfLeft !== 0 && "group-hover:text-userModerateCyan"}`}
+              className={`ml-4 font-bold ${numOfLeft !== 0 && "md:group-hover:text-userModerateCyan"}`}
             >
               {heading}
             </p>
@@ -50,14 +51,9 @@ function TopSectionWithRadioInput({
             )}
           </div>
         </div>
-        {/* NUM OF PRODUCTS LEFT TEXT */}
+        {/* NUM OF PRODUCTS LEFT TEXT FOR DESKTOP */}
         {heading !== "Pledge with no reward" && (
-          <p className="text-sm font-semibold text-userDarkGray">
-            <span className="mr-1 text-lg font-bold text-black">
-              {numOfLeft}
-            </span>{" "}
-            left
-          </p>
+          <ProductsLeftText numOfLeft={numOfLeft} variant="desktop" />
         )}
       </div>
     </label>

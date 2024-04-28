@@ -63,6 +63,7 @@ function MobileNav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
+            onClick={() => setIsMenuOpen(false)}
             className="fixed left-0 top-0 z-10 h-dvh w-full bg-black/50"
           >
             <motion.nav
@@ -74,7 +75,12 @@ function MobileNav() {
               fixed left-1/2 z-50 w-5/6 -translate-x-1/2 overflow-hidden rounded-lg bg-white
               "
             >
-              <ul className="text-left font-bold [&>*:not(:last-child)]:border-b [&>li>button]:py-4 [&>li>button]:pl-6">
+              <ul
+                className="
+                font-bold [&>*:not(:last-child)]:border-b [&>li>button]:h-full [&>li>button]:w-full [&>li>button]:py-4 [&>li>button]:pl-6
+                [&>li>button]:text-left
+                "
+              >
                 <li>
                   <button type="button" onClick={handleButtonClick}>
                     About

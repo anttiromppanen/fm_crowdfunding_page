@@ -23,9 +23,13 @@ export default function BottomPledgeAmountToggle({
       className="overflow-hidden"
     >
       <hr className="" />
-      <div className="flex items-center justify-between px-7 py-6">
-        <p className="text-userDarkGray">Enter your pledge</p>
-        <div className="flex gap-x-4">
+      <div className="flex flex-wrap items-center justify-between px-7 py-6 sm:flex-nowrap">
+        <p className="mb-6 basis-full text-center text-userDarkGray sm:mb-0 sm:text-left">
+          Enter your pledge
+        </p>
+        {/* INPUT & BUTTON CONTAINER */}
+        <div className="flex w-full justify-center gap-x-4 sm:w-auto">
+          {/* INPUT */}
           <div className="relative">
             <input
               type="number"
@@ -35,8 +39,8 @@ export default function BottomPledgeAmountToggle({
               value={pledgeInputValue}
               onChange={handleInputChange}
               className={`
-                w-20 rounded-full border border-userDarkGray/50 py-2 pl-5 pr-2 text-center font-bold transition-all
-                hover:border-userDarkCyan focus:w-28
+                w-full rounded-full border border-userDarkGray/50 py-2 pl-5 pr-2 text-center font-bold transition-all hover:border-userDarkCyan
+                sm:w-20 sm:focus:w-28
                 ${isPledgeInputError && "!border-red-600"}
               `}
             />
@@ -52,7 +56,7 @@ export default function BottomPledgeAmountToggle({
           <button
             type="submit"
             onClick={handlePledgeAmountSubmit}
-            className="rounded-full bg-userModerateCyan px-5 text-white hover:bg-userDarkCyan"
+            className="w-1/2 rounded-full bg-userModerateCyan px-5 text-white hover:bg-userDarkCyan sm:w-auto"
           >
             Continue
           </button>

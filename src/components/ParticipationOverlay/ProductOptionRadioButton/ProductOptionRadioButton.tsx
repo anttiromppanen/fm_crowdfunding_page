@@ -6,6 +6,7 @@ import usePledgeStore from "../../../store/usePledgeStore";
 import { ExtendedOptionIds as OptionIds } from "../../../types/types";
 import BottomPledgeAmountToggle from "./BottomPledgeAmountToggle";
 import TopSectionWithRadioInput from "./TopSectionWithRadioInput";
+import ProductsLeftText from "./ProductsLeftText";
 
 interface ProductOptionRadioButtonProps {
   id: OptionIds;
@@ -70,7 +71,7 @@ function ProductOptionRadioButton({
         ${activeRadioTab === id && "outline outline-2 !outline-userModerateCyan"}
       `}
     >
-      <div className="px-7 py-8">
+      <div className="px-7 py-4 md:py-8">
         <TopSectionWithRadioInput
           id={id}
           numOfLeft={numOfLeft}
@@ -82,6 +83,10 @@ function ProductOptionRadioButton({
         <p className="mt-6 text-userDarkGray group-disabled:cursor-not-allowed md:ml-10">
           {text}
         </p>
+        {/* NUM OF PRODUCTS LEFT TEXT FOR DESKTOP */}
+        {heading !== "Pledge with no reward" && (
+          <ProductsLeftText numOfLeft={numOfLeft} variant="mobile" />
+        )}
       </div>
 
       {/* BOTTOM TOGGLE OPEN SECTION */}

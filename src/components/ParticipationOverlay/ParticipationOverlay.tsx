@@ -12,6 +12,30 @@ const submittedVariants: Variants = {
   exit: { opacity: 0, translateX: "-40%", transition: { duration: 1 } },
 };
 
+const submittedContentVariants: Record<"image" | "text", Variants> = {
+  image: {
+    initial: { opacity: 0, scale: 0 },
+    animate: {
+      opacity: 1,
+      scale: 1,
+      transition: { delay: 0.5, type: "spring" },
+    },
+  },
+  text: {
+    initial: { opacity: 0, x: -20 },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delayChildren: 1.5,
+        staggerChildren: 1.5,
+        stiffness: 900,
+        ease: "easeOut",
+      },
+    },
+  },
+};
+
 function ParticipationOverlay() {
   const isPledgeSubmitted = useGeneralStateStore(
     (state) => state.isPledgeSubmitted,
@@ -70,22 +94,43 @@ function ParticipationOverlay() {
             fixed left-1/2 flex w-96 flex-col items-center rounded-lg bg-white px-8 py-10 text-center
             "
           >
-            <img src={successImg} alt="Success" />
-            <h2 className="mt-10 text-2xl font-bold">
-              Thanks for your support!
-            </h2>
-            <p className="mt-4 text-userDarkGray">
-              Your pledge brings us one step closer to sharing Mastercraft
-              Bamboo Monitor Riser worldwide. You will get an email once our
-              campaign is completed. Got it!
-            </p>
-            <button
+            <motion.img
+              src={successImg}
+              alt="Success"
+              variants={submittedContentVariants.image}
+              initial="initial"
+              animate="animate"
+            />
+            <motion.div
+              variants={submittedContentVariants.text}
+              initial="initial"
+              animate="animate"
+            >
+              <motion.h2
+                variants={submittedContentVariants.text}
+                className="mt-10 text-2xl font-bold"
+              >
+                Thanks for your support!
+              </motion.h2>
+              <motion.p
+                variants={submittedContentVariants.text}
+                className="mt-4 text-userDarkGray"
+              >
+                Your pledge brings us one step closer to sharing Mastercraft
+                Bamboo Monitor Riser worldwide. You will get an email once our
+                campaign is completed. Got it!
+              </motion.p>
+            </motion.div>
+            <motion.button
               type="button"
               onClick={handleSubmittedClick}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, rotate: [-2, 0, 4, 0, -3, 0] }}
+              transition={{ delay: 4, duration: 0.3 }}
               className="mt-8 rounded-full bg-userModerateCyan px-8 py-3 text-sm font-bold text-white hover:bg-userDarkCyan"
             >
               Got it
-            </button>
+            </motion.button>
           </motion.div>
         ) : (
           <Options resetParentClick={resetParentClick} key="testings2">
